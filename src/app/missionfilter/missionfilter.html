@@ -1,10 +1,8 @@
 <h2>Filter by Launch Year</h2>
 
-<input
-  type="text"
-  [(ngModel)]="launchYear"
-  placeholder="Enter launch year"
-/>
+<mat-form-field appearance="outline">
+  <input matInput placeholder="Enter launch year" [(ngModel)]="launchYear">
+</mat-form-field>
 
-<button (click)="onSearch()">Search</button>
-<button (click)="onClear()">Clear</button>
+<button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+<button mat-button (click)="onClear()">Clear</button>
