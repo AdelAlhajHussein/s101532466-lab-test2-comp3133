@@ -10,6 +10,8 @@ import { Mission } from '../models/mission';
 })
 export class Missionlist implements OnInit {
   missions: Mission[] = [];
+  filteredMissions: Mission[] = [];
+  selectedMission?: Mission;
 
   constructor(
     private spacexService: SpacexapiService,
@@ -17,17 +19,30 @@ export class Missionlist implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit running');
-
     this.spacexService.getMissions().subscribe({
       next: (data: Mission[]) => {
-        console.log('API data received:', data);
         this.missions = data;
+        this.filteredMissions = data;
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('API error:', err);
       }
     });
+  }
+
+  filterByYear(year: string): void {
+    if (!year) {
+      this.filteredMissions = this.missions;
+    } else {
+      this.filteredMissions = this.missions.filter(
+        (mission) => mission.launch_year?.toString() === year
+      );
+    }
+    this.selectedMission = undefined;
+  }
+
+  selectMission(mission: Mission): void {
+    this.selectedMission = mission;
   }
 }

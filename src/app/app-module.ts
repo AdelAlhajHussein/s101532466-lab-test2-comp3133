@@ -6,14 +6,14 @@ import { App } from './app';
 import { Missionlist } from './missionlist/missionlist';
 
 import { provideHttpClient } from '@angular/common/http';
+import { Missionfilter } from './missionfilter/missionfilter';
+import { FormsModule } from '@angular/forms';
+import { Missiondetails } from './missiondetails/missiondetails';
 
 @NgModule({
-  declarations: [App, Missionlist],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideHttpClient()
-  ],
+  declarations: [App, Missionlist, Missionfilter, Missiondetails],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
   bootstrap: [App],
 })
 export class AppModule {}
